@@ -7,7 +7,9 @@ import (
 	"github.com/go-irain/logger"
 )
 
-type after struct{}
+type after struct {
+	hooks []CustomHookFunc
+}
 
 func (mw *after) MiddleWare(egn *gin.Engine) {
 	egn.Use(func(ctx *gin.Context) {
@@ -15,14 +17,18 @@ func (mw *after) MiddleWare(egn *gin.Engine) {
 			ctx.Next()
 		}(ctx)
 
+		// 执行自定义钩子方法
+		for _, hook := range mw.hooks {
+			hook(ctx)
+		}
 		logResponse(ctx)  // 记录响应信息
 		markResponse(ctx) // 标记响应信息
 	})
 }
 
 // NewAfterMW 后置中间件
-func NewAfterMW() MiddleWarer {
-	return &after{}
+func NewAfterMW(hooks []CustomHookFunc) MiddleWarer {
+	return &after{hooks: hooks}
 }
 
 // logResponse 响应信息记录到日志
