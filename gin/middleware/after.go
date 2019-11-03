@@ -27,16 +27,16 @@ func NewAfterMW() MiddleWarer {
 
 // logResponse 响应信息记录到日志
 func logResponse(ctx *gin.Context) {
-	logid, _ := ctx.Get("logid")
+	RequestID, _ := ctx.Get("request_id")
 	data, _ := ctx.Get("response_data")
-	logger.Info(logid, "Reponse:", data)
+	logger.Info(RequestID, "Reponse:", data)
 }
 
 // markResponse 标记响应
 func markResponse(ctx *gin.Context) {
-	logid, _ := ctx.Get("logid")
+	RequestID, _ := ctx.Get("request_id")
 	sTime, _ := ctx.Get("http_stime")
 	eTime := time.Now()
 	duration := eTime.Sub(sTime.(time.Time))
-	logger.Info(logid, "http[stime:", sTime, "~ etime:", eTime, "]\n************ Cost Duration : ", duration.String(), " ************\r\n")
+	logger.Info(RequestID, "http[stime:", sTime, "~ etime:", eTime, "]\n************ Cost Duration : ", duration.String(), " ************\r\n")
 }
