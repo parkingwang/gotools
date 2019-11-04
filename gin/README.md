@@ -1,20 +1,20 @@
 # gin框架使用过程中抽取的复用包
 
-## middleware 
-
+## middleware
 
 ### 特性
+
 * 封装前置和后置中间钩子:标记请求、记录请求、记录响应信息
 * 支持添加自定义前置或后置处理方法，要求是`[]CustomHookFunc`函数类型
 * 持续优化推进中...
 
-
 ### 示例
+
 ```go
-package main 
+package main
 
 import (
-    ... 
+    ...
     "github.com/parkingwang/gotools/gin/middleware"
     "github.com/parkingwang/gotools/standard"
 )
