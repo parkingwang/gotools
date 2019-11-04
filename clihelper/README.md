@@ -29,8 +29,8 @@ var extra  = map[string]clihelper.Extra{
 }
 
 func init(){
-	params = clihelper.NewParams()
-	params.Hook(extra)
+    params = clihelper.NewParams()
+    params.Hook(extra)
     params.Parse()
     
     ...
