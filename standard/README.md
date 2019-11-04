@@ -19,5 +19,5 @@
     standard.RetFail(ctx, nil)
 
     // 链式调用
-    standard.NewResponse(ctx).SetCode(1).SetMsg(msg).RetJSON()
+    standard.NewResponse(ctx).Code(1).Msg(msg).Data([]interface{}{}).RetJSON()
 ```

@@ -18,20 +18,20 @@ type Response struct {
 	data    interface{}
 }
 
-// SetCode 设置响应码
-func (rsp *Response) SetCode(code int) *Response {
+// Code 设置响应码
+func (rsp *Response) Code(code int) *Response {
 	rsp.code = code
 	return rsp
 }
 
-// SetMsg 设置响应消息
-func (rsp *Response) SetMsg(msg string) *Response {
+// Msg 设置响应消息
+func (rsp *Response) Msg(msg string) *Response {
 	rsp.message = msg
 	return rsp
 }
 
-// SetData 设置响应数据
-func (rsp *Response) SetData(data interface{}) *Response {
+// Data 设置响应数据
+func (rsp *Response) Data(data interface{}) *Response {
 	rsp.data = data
 	return rsp
 }
@@ -54,10 +54,10 @@ func NewResponse(j JSONer) *Response {
 
 // RetSucc 成功响应
 func RetSucc(j JSONer, data interface{}) {
-	NewResponse(j).SetCode(0).SetMsg("操作成功").SetData(data).RetJSON()
+	NewResponse(j).Code(0).Msg("操作成功").Data(data).RetJSON()
 }
 
 // RetFail 失败响应
 func RetFail(j JSONer, data interface{}) {
-	NewResponse(j).SetCode(1).SetMsg("操作失败").SetData(data).RetJSON()
+	NewResponse(j).Code(1).Msg("操作失败").Data(data).RetJSON()
 }
