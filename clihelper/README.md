@@ -13,6 +13,11 @@
 ```go
 package main
 
+import (
+    ...
+	"github.com/parkingwang/gotools/clihelper"
+)
+
 var extra  = map[string]clihelper.Extra{
     "tablename": clihelper.Extra{
         Name:  "t",
