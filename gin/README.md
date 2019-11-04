@@ -13,6 +13,12 @@
 ```go
 package main 
 
+import (
+    ... 
+    "github.com/parkingwang/gotools/gin/middleware"
+    "github.com/parkingwang/gotools/standard"
+)
+
 var beforehookFs = []middleware.CustomHookFunc{
     // 只允许JSON格式数据
     func(ctx *gin.Context) {
