@@ -48,7 +48,7 @@ func markResponse(ctx *gin.Context) {
 	sTime, _ := st.(time.Time)
 	eTime := time.Now()
 	duration := eTime.Sub(sTime)
-	st2et := fmt.Sprintf("<%s~%s>", eTime.Format(tf), sTime.Format(tf))
+	st2et := fmt.Sprintf("<%s ~ %s>", eTime.Format(tf), sTime.Format(tf))
 
 	logger.Info(RequestID, "******* Duration:", duration.String(), st2et, "*******")
 }
