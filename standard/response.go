@@ -36,6 +36,20 @@ func (rsp *Response) Data(data interface{}) *Response {
 	return rsp
 }
 
+// Raw 链式设置
+func (rsp *Response) Raw(mix interface{}) *Response {
+	switch i := mix.(type) {
+	case int:
+		rsp.Code(i)
+	case string:
+		rsp.Msg(i)
+	default:
+		rsp.Data(i)
+	}
+
+	return rsp
+}
+
 // RetJSON 返回json消息
 func (rsp *Response) RetJSON() {
 	data := map[string]interface{}{
@@ -57,7 +71,25 @@ func RetSucc(j JSONer, data interface{}) {
 	NewResponse(j).Code(0).Msg("操作成功").Data(data).RetJSON()
 }
 
+// RetMixSucc 设置多个返回参数
+func RetMixSucc(j JSONer, args ...interface{}) {
+	rsp := NewResponse(j).Code(0).Msg("操作成功")
+	for _, d := range args {
+		rsp.Raw(d)
+	}
+	rsp.RetJSON()
+}
+
 // RetFail 失败响应
 func RetFail(j JSONer, data interface{}) {
 	NewResponse(j).Code(1).Msg("操作失败").Data(data).RetJSON()
+}
+
+// RetMixFail 设置多个返回参数
+func RetMixFail(j JSONer, args ...interface{}) {
+	rsp := NewResponse(j).Code(1).Msg("操作失败")
+	for _, d := range args {
+		rsp.Raw(d)
+	}
+	rsp.RetJSON()
 }
