@@ -1,6 +1,7 @@
 package middleware
 
 import (
+	"fmt"
 	"time"
 
 	"github.com/gin-gonic/gin"
@@ -41,8 +42,13 @@ func logResponse(ctx *gin.Context) {
 // markResponse 标记响应
 func markResponse(ctx *gin.Context) {
 	RequestID, _ := ctx.Get("request_id")
-	sTime, _ := ctx.Get("http_stime")
+	st, _ := ctx.Get("http_stime")
+
+	tf := "2006-01-02 15:04:05.000"
+	sTime, _ := st.(time.Time)
 	eTime := time.Now()
-	duration := eTime.Sub(sTime.(time.Time))
-	logger.Info(RequestID, "******* Duration:", duration.String(), "<", sTime, " ~ ", eTime, ">", "*******")
+	duration := eTime.Sub(sTime)
+	st2et := fmt.Sprintf("<%s~%s>", eTime.Format(tf), sTime.Format(tf))
+
+	logger.Info(RequestID, "******* Duration:", duration.String(), st2et, "*******")
 }
