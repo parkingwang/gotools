@@ -50,7 +50,7 @@ func logRequest(ctx *gin.Context) {
 
 	RequestID, _ := ctx.Get("request_id")
 	ctx.Request.ParseMultipartForm(1024)
-	logger.Info(RequestID, "\n\n************ Client : ", ctx.Request.RemoteAddr, " [", ctx.Request.Method, "] ", ctx.Request.URL.Path, "************")
+	logger.Info(RequestID, "******* Client : ", ctx.Request.RemoteAddr, " [", ctx.Request.Method, "] ", ctx.Request.URL.Path, "*******")
 	logger.Info(RequestID, "URL: ", ctx.Request.URL, "ContentType: ", ctx.ContentType())
 	logger.Info(RequestID, " PostForm:", ctx.Request.PostForm, "JSON:", string(bodyBytes))
 }

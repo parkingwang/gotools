@@ -44,5 +44,5 @@ func markResponse(ctx *gin.Context) {
 	sTime, _ := ctx.Get("http_stime")
 	eTime := time.Now()
 	duration := eTime.Sub(sTime.(time.Time))
-	logger.Info(RequestID, "http[stime:", sTime, "~ etime:", eTime, "]\n************ Cost Duration : ", duration.String(), " ************\r\n")
+	logger.Info(RequestID, "******* Duration:", duration.String(), "<", sTime, " ~ ", eTime, ">", "*******")
 }
