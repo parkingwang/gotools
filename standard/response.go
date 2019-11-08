@@ -41,6 +41,8 @@ func (rsp *Response) Raw(mix interface{}) *Response {
 	switch i := mix.(type) {
 	case int:
 		rsp.Code(i)
+	case error:
+		rsp.Msg(i.Error())
 	case string:
 		rsp.Msg(i)
 	default:
