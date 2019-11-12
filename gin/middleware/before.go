@@ -23,6 +23,7 @@ func (mw *before) MiddleWare(egn *gin.Engine) {
 			err := hook(ctx)
 			if err != nil {
 				ctx.Abort()
+				break
 			}
 		}
 
