@@ -22,6 +22,9 @@ func (mw *before) MiddleWare(egn *gin.Engine) {
 		for _, hook := range mw.hooks {
 			err := hook(ctx)
 			if err != nil {
+				RequestID, _ := ctx.Get("request_id")
+				logger.Error(RequestID, err)
+				ctx.Abort()
 				break
 			}
 		}
