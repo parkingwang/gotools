@@ -19,13 +19,12 @@ func (mw *after) MiddleWare(egn *gin.Engine) {
 		}(ctx)
 
 		// 执行自定义钩子方法
-		for _, hook := range mw.hooks {
-			err := hook(ctx)
-			if err != nil {
-				// ctx.Abort()
-				break
-			}
-		}
+		// for _, hook := range mw.hooks {
+		// 	err := hook(ctx)
+		// 	if err != nil {
+		// 		break
+		// 	}
+		// }
 		logResponse(ctx)  // 记录响应信息
 		markResponse(ctx) // 标记响应信息
 	})
