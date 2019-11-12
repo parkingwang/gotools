@@ -20,7 +20,10 @@ func (mw *before) MiddleWare(egn *gin.Engine) {
 		logRequest(ctx)  // 请求信息记录
 		// 执行自定义钩子方法
 		for _, hook := range mw.hooks {
-			hook(ctx)
+			err := hook(ctx)
+			if err != nil {
+				ctx.Abort()
+			}
 		}
 
 		func(ctx *gin.Context) {

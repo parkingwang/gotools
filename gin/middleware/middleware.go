@@ -8,7 +8,7 @@ type MiddleWarer interface {
 }
 
 // CustomHookFunc 自定义钩子方法
-type CustomHookFunc func(ctx *gin.Context)
+type CustomHookFunc func(ctx *gin.Context) error
 
 // UseMiddleWare 执行中间件
 func UseMiddleWare(egn *gin.Engine, bhooks []CustomHookFunc, ahooks []CustomHookFunc) {
