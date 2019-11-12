@@ -22,7 +22,7 @@ func (mw *before) MiddleWare(egn *gin.Engine) {
 		for _, hook := range mw.hooks {
 			err := hook(ctx)
 			if err != nil {
-				ctx.Abort()
+				// ctx.Abort()
 				break
 			}
 		}
