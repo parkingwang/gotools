@@ -25,7 +25,7 @@ var beforehookFs = []middleware.CustomHookFunc{
         ctp := ctx.ContentType()
         if ctp != "" && ctp != gin.MIMEJSON {
             msg := "仅支持JSON数据格式"
-            standard.NewResponse(ctx).SetCode(1).SetMsg(msg).RetJSON()
+            standard.NewResponse(ctx).Status(1).Msg(msg).RetJSON()
             ctx.Abort()
         }
     },
