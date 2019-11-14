@@ -19,7 +19,7 @@ var Msgs = map[uint]string{
 
 // JSONer json响应接口
 type JSONer interface {
-	JSON(status uint, obj interface{})
+	JSON(code int, obj interface{})
 	Set(key string, value interface{})
 }
 
