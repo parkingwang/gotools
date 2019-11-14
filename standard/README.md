@@ -23,6 +23,9 @@ data | object | 否 | 响应数据对象
 
 
 ### API
+![](./api.png)
+
+[api接口文档](https://gowalker.org/github.com/parkingwang/gotools/standard)
 
 
 ### 示例
