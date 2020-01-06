@@ -1,6 +1,7 @@
 package standard
 
 import (
+	"encoding/json"
 	"net/http"
 )
 
@@ -81,7 +82,8 @@ func (rsp *Response) RetJSON() {
 		"msg":    rsp.msg,
 		"data":   rsp.data,
 	}
-	rsp.jsoner.Set("response_data", data)
+	rs, _ := json.Marshal(data)
+	rsp.jsoner.Set("response_data", string(rs))
 	rsp.jsoner.JSON(http.StatusOK, data)
 }
 
