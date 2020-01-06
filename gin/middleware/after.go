@@ -22,8 +22,7 @@ func (mw *after) MiddleWare(egn *gin.Engine) {
 		for _, hook := range mw.hooks {
 			err := hook(ctx)
 			if err != nil {
-				RequestID, _ := ctx.Get("request_id")
-				logger.Error(RequestID, err)
+				logger.Error(ctx.GetString("request_id"), err)
 				ctx.Abort()
 				break
 			}
@@ -40,14 +39,12 @@ func NewAfterMW(hooks []CustomHookFunc) MiddleWarer {
 
 // logResponse 响应信息记录到日志
 func logResponse(ctx *gin.Context) {
-	RequestID, _ := ctx.Get("request_id")
 	data, _ := ctx.Get("response_data")
-	logger.Info(RequestID, "Reponse:", data)
+	logger.Info(ctx.GetString("request_id"), "Reponse:", data)
 }
 
 // markResponse 标记响应
 func markResponse(ctx *gin.Context) {
-	RequestID, _ := ctx.Get("request_id")
 	st, _ := ctx.Get("http_stime")
 
 	tf := "2006-01-02 15:04:05.000"
@@ -56,5 +53,5 @@ func markResponse(ctx *gin.Context) {
 	duration := eTime.Sub(sTime)
 	st2et := fmt.Sprintf("<%s ~ %s>", eTime.Format(tf), sTime.Format(tf))
 
-	logger.Info(RequestID, "******* Duration:", duration.String(), st2et, "*******")
+	logger.Info(ctx.GetString("request_id"), "******* Duration:", duration.String(), st2et, "*******")
 }
