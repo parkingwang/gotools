@@ -22,8 +22,7 @@ func (mw *before) MiddleWare(egn *gin.Engine) {
 		for _, hook := range mw.hooks {
 			err := hook(ctx)
 			if err != nil {
-				RequestID, _ := ctx.Get("request_id")
-				logger.Error(RequestID, err)
+				logger.Error(ctx.GetString("request_id"), err)
 				ctx.Abort()
 				break
 			}
@@ -54,7 +53,7 @@ func logRequest(ctx *gin.Context) {
 		ctx.Request.Body = ioutil.NopCloser(bytes.NewBuffer(bodyBytes))
 	}
 
-	RequestID, _ := ctx.Get("request_id")
+	RequestID := ctx.GetString("request_id")
 	ctx.Request.ParseMultipartForm(1024)
 	logger.Info(RequestID, "******* Client : ", ctx.Request.RemoteAddr, " [", ctx.Request.Method, "] ", ctx.Request.URL.Path, "*******")
 	logger.Info(RequestID, "URL: ", ctx.Request.URL, "ContentType: ", ctx.ContentType())
