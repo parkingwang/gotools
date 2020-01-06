@@ -45,10 +45,8 @@ func logResponse(ctx *gin.Context) {
 
 // markResponse 标记响应
 func markResponse(ctx *gin.Context) {
-	st, _ := ctx.Get("http_stime")
-
 	tf := "2006-01-02 15:04:05.000"
-	sTime, _ := st.(time.Time)
+	sTime := ctx.GetTime("http_stime")
 	eTime := time.Now()
 	duration := eTime.Sub(sTime)
 	st2et := fmt.Sprintf("<%s ~ %s>", eTime.Format(tf), sTime.Format(tf))
