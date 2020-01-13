@@ -3,6 +3,7 @@ package middleware
 import (
 	"bytes"
 	"io/ioutil"
+	"strings"
 	"time"
 
 	"github.com/gin-gonic/gin"
@@ -57,5 +58,7 @@ func logRequest(ctx *gin.Context) {
 	ctx.Request.ParseMultipartForm(1024)
 	logger.Info(RequestID, "******* Client : ", ctx.Request.RemoteAddr, " [", ctx.Request.Method, "] ", ctx.Request.URL.Path, "*******")
 	logger.Info(RequestID, "URL: ", ctx.Request.URL, "ContentType: ", ctx.ContentType())
-	logger.Info(RequestID, "PostForm:", ctx.Request.PostForm, "JSON:", string(bodyBytes))
+	if !strings.Contains(ctx.GetHeader("Content-Disposition"), "name=\"file\"") {
+		logger.Info(RequestID, "PostForm:", ctx.Request.PostForm, "JSON:", string(bodyBytes))
+	}
 }
