@@ -58,7 +58,7 @@ func logRequest(ctx *gin.Context) {
 	ctx.Request.ParseMultipartForm(1024)
 	logger.Info(RequestID, "******* Client : ", ctx.Request.RemoteAddr, " [", ctx.Request.Method, "] ", ctx.Request.URL.Path, "*******")
 	logger.Info(RequestID, "URL: ", ctx.Request.URL, "ContentType: ", ctx.ContentType())
-	if !strings.Contains(ctx.GetHeader("Content-Disposition"), "file") {
+	if ctx.ContentType() != "multipart/form-data"{
 		logger.Info(RequestID, "PostForm:", ctx.Request.PostForm, "JSON:", string(bodyBytes))
 	}
 }
