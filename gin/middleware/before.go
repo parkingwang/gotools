@@ -3,7 +3,6 @@ package middleware
 import (
 	"bytes"
 	"io/ioutil"
-	"strings"
 	"time"
 
 	"github.com/gin-gonic/gin"
